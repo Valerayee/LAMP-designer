@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Result</title>
+    <link rel="stylesheet" href="res_styles.css" />
+
+    <script defer src="res_renderer.js"></script>
+  </head>
+  <body>
+    <p style="font-size: 22px;">Time taken</p>
+    <div class="field-line">
+      <div class="field"><p>Primer search</p><p id="primer_search">[primer_search]</p></div>
+      <div class="field"><p>Primer sort</p><p id="primer_sort">[primer_sort]</p></div>
+      <div class="field"><p>Complete</p><p id="time_taken">[time_taken]</p></div>
+    </div>
+    <p style="font-size: 22px;">Primers found</p>
+    <div class="field-line">
+      <div class="field" style="width: 160px"><p>Base</p><p id="base_primers">[base_primers]</p></div>
+      <div class="field" style="width: 160px;"><p>Complementary</p><p id="comp_primers">[comp_primers]</p></div>
+    </div>
+    <p id="sets_found" style="font-size: 22px;">[SETS_FOUND]</p>
+    <div id = "sets">
+    </div> 
+  </body>
+</html>

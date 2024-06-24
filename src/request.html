@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Request Form</title>
+
+    <link rel="stylesheet" href="req_styles.css" />
+
+    <script defer src="req_renderer.js"></script>
+  </head>
+
+  <body style="overflow: hidden">
+    <div style="display: flex; margin: auto; justify-content: space-around;">
+      <textarea id = "genome_text"></textarea>
+      <button class="genome_btn" id = "genome_copy_btn"><img src="images/copy.png"/></button>
+      <button class="genome_btn" id = "genome_delete_btn"><img src="images/clear.png"/></button>
+      <button class="genome_btn" id = "genome_upload_btn"><img src="images/upload.png"/></button>
+    </div>
+
+    <div id="dropzone">
+      <p id="dropzone_text">Drag and drop file containing nucleotide sequence or click and select it in file explorer</p>
+    </div>
+    <input type="file" id = "clickzone" style="display: none;"/>
+
+    <div id="parameters" style="display: none;">
+      <p style="font-size: 22px; margin-bottom: 15px;" id="genome_title">Sequence</p>
+      <div class="sliders_control">
+        <input id="genome_from_slider" type="range"/>
+        <input id="genome_to_slider" type="range"/>
+      </div>
+      <div class="form_control" style="justify-content: space-between;">
+        <input type="tel" style="width: 150px;" readonly id="genome_from"/>
+        <input type="tel" style="width: 150px;" readonly id="genome_to"/>
+      </div>
+
+      <p style="font-size: 22px;">Calculation parameters</p>
+
+      <div class="parameter-line">
+        <div class="field">
+          <p>Threads</p>
+          <input id = "threads" type="number" style=" width: 100px" min="1" max="999999" step="1" value="1"/>
+        </div>
+
+        <div class="field">
+          <p>Dimer end</p>
+          <input id = "dimer" type="number" style="width: 50px" min = "1" max = "50" step = "1" value="3"/>
+        </div>
+
+        <div class="field">
+          <p>Max repeat</p>
+          <input id = "max_repeat" type="number" style=" width: 50px" min="1" max="50" step="1" value="4"/>
+        </div>
+
+        <div class="field" style="display: none;">
+          <p>GC/Tm divergence</p>
+          <input id = "divergence" type="number" style="width: 70px" min = "0" max = "1" step="0.001" value="0.001"/>
+        </div>
+
+        <div class="field">
+          <p>Na+</p>
+          <input id = "na_plus" type="number" style=" width:60px" min = "0" max = "1" step = "0.01" value="0.05"/>
+        </div>
+
+        <div class="field" style="display: none;">
+          <p>Skip</p>
+          <input id = "skip" type="checkbox" style="height: 20px; width: 20px;">
+        </div>
+        
+      </div>
+
+      <p style="font-size: 22px;">Primer parameters</p>
+
+      <div class="parameter-line">
+        <div class="field">
+          <p>Primer length</p>
+          <div class="form_control">
+            <input id = "length_from" type="number" style="width: 50px" min="1" max="50" step="1" value="20"/>
+            -
+            <input id = "length_to" type="number" style="width: 50px" min="1" max="50" step="1" value="25"/>
+          </div>
+        </div>
+        
+        <div class="field">
+          <p>GC concentration</p>
+          <div class="form_control">
+            <input id = "GC_from" type="number" style="width: 50px" min = "0" max = "100" step = "0.01" value="40"/>
+            -
+            <input id = "GC_to" type="number" style="width: 50px" min = "0" max = "100" step = "0.01" value="60"/>
+          </div>
+        </div>
+
+        <div class="field">
+          <p>Melting temperature</p>
+          <div class="form_control">
+            <input id = "Tm_from" type="number" style="width: 50px" min = "0" max = "100" step = "0.01" value="55"/>
+            -
+            <input id = "Tm_to" type="number" style="width: 50px" min = "0" max = "100" step = "0.01" value="65"/>
+          </div>
+        </div>
+
+      </div>
+
+      <p style="font-size: 22px;">Set parameters</p>
+
+      <div class="parameter-line">
+
+        <div class="field">
+          <p>Amplicon length</p>
+          <div class="form_control">
+            <input id = "amplicon_from" type="number" style="width: 70px" min="1" max="500" step="1" value="120"/>
+            -
+            <input id = "amplicon_to" type="number" style="width: 70px" min="1" max="500" step="1" value="220"/>
+          </div>
+        </div>
+
+        <div class="field">
+          <p>Tm difference</p>
+          <input id = "Tm_diff" type="number" style="width: 50px" min="0" max="100" step="0.01" value="2"/>
+        </div>
+
+        <div class="field">
+          <p>Length difference</p>
+          <input id = "length_diff" type="number" style="width: 50px" min="1" max="50" step="1" value="3"/>
+        </div>
+
+      </div>
+
+      <p style="font-size: 22px;">Distances between primers in set (loop: <input type="checkbox" id = "loop">)</p>
+
+      <div class="parameter-line" style="overflow-x: scroll; max-width: 95%; border-radius: 10px; border: 2px solid gray; padding: 5px;">
+        <div class="field" id = "F3-F2">
+          <p>F3-F2</p>
+          <div class="form_control">
+            <input id = "F3-F2_from" type="number" style="width: 40px" min="1" max="50" step="1" value="1"/>
+            -
+            <input id = "F3-F2_to" type="number" style="width: 40px" min="1" max="50" step="1" value="10"/>
+          </div>
+        </div>
+
+        <div class="field" id = "F2-F1c">
+          <p>F2-F1c</p>
+          <div class="form_control">
+            <input id = "F2-F1c_from" type="number" style="width: 40px" min="1" max="50" step="1" value="10"/>
+            -
+            <input id = "F2-F1c_to" type="number" style="width: 40px" min="1" max="50" step="1" value="25"/>
+          </div>
+        </div>
+
+        <div class="field" id = "F2-L1" style="display: none;">
+          <p>F2-L1</p>
+          <div class="form_control">
+            <input id = "F2-L1_from" type="number" style="width: 40px" min="1" max="500" step="1" value="2"/>
+            -
+            <input id = "F2-L1_to" type="number" style="width: 40px" min="1" max="500" step="1" value="5"/>
+          </div>
+        </div>
+
+        <div class="field" id = "L1-F1c" style="display: none;">
+          <p>L1-F1c</p>
+          <div class="form_control">
+            <input id = "L1-F1c_from" type="number" style="width: 40px" min="1" max="500" step="1" value="2"/>
+            -
+            <input id = "L1-F1c_to" type="number" style="width: 40px" min="1" max="500" step="1" value="5"/>
+          </div>
+        </div>
+
+        <div class="field" id = "F1c-B1c">
+          <p>F1c-B1c</p>
+          <div class="form_control">
+            <input id = "F1c-B1c_from" type="number" style="width: 40px" min="1" max="50" step="1" value="0"/>
+            -
+            <input id = "F1c-B1c_to" type="number" style="width: 40px" min="1" max="50" step="1" value="30"/>
+          </div>
+        </div>
+
+        <div class="field" id = "B1c-L2" style="display: none;">
+          <p>B1c-L2</p>
+          <div class="form_control">
+            <input id = "B1c-L2_from" type="number" style="width: 40px" min="1" max="500" step="1" value="2"/>
+            -
+            <input id = "B1c-L2_to" type="number" style="width: 40px" min="1" max="500" step="1" value="5"/>
+          </div>
+        </div>
+
+        <div class="field" id = "L2-B2" style="display: none;">
+          <p>L2-B2</p>
+          <div class="form_control">
+            <input id = "L2-B2_from" type="number" style="width: 40px" min="1" max="500" step="1" value="2"/>
+            -
+            <input id = "L2-B2_to" type="number" style="width: 40px" min="1" max="500" step="1" value="5"/>
+          </div>
+        </div>
+
+        <div class="field" id = "B1c-B2">
+          <p>B1c-B2</p>
+          <div class="form_control">
+            <input id = "B1c-B2_from" type="number" style="width: 40px" min="1" max="50" step="1" value="10"/>
+            -
+            <input id = "B1c-B2_to" type="number" style="width: 40px" min="1" max="50" step="1" value="25"/>
+          </div>
+        </div>
+
+        <div class="field" id = "B2-B3">
+          <p>B2-B3</p>
+          <div class="form_control">
+            <input id = "B2-B3_from" type="number" style="width: 40px" min="1" max="50" step="1" value="1"/>
+            -
+            <input id = "B2-B3_to" type="number" style="width: 40px" min="1" max="50" step="1" value="10"/>
+          </div>
+        </div>
+        
+      </div>
+      
+      <div style="justify-content: center; display: flex">
+        <button id = "LAMP_button" class="button-26">LAMP</button>
+      </div>
+
+    </div>
+  
+  </body>
+
+</html>
+

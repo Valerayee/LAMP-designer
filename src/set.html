@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Set</title>
+    <link rel="stylesheet" href="set_styles.css" />
+
+    <script defer src="set_renderer.js"></script>
+  </head>
+  <body>
+    <p style="font-size: 22px;" id="index">[INDEX]</p>
+
+    <p style="font-size: 22px;">Position</p>
+
+    <div style="display: flex;">
+      <div class="field"><p>Start</p><p id="start">[START]</p></div>
+
+      <div class="field"><p>Length</p><p id="length">[LENGTH]</p>
+      </div>
+
+      <div class="field"><p>End</p><p id="end">[END]</p>
+      </div>
+    </div>
+
+    <p style="font-size: 22px;">Temperature</p>
+
+    <div style="display: flex;">
+      <div class="field"><p>Minimal</p><p id="min_tm">[MIN_TM]</p></div>
+
+      <div class="field"><p>Difference</p><p id="tm_diff">[TM_DIFF]</p></div>
+
+      <div class="field"><p>Maximum</p><p id="max_tm">[MAX_TM]</p></div>
+    </div>
+
+    <p style="font-size: 22px;">Amplicon</p>
+
+    <div style="border-style: solid; border-radius: 7px; width: 95%; margin: auto; padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 7px;
+    border: solid #08358ffd 2px; margin-top: 5px;">
+      <div>5'-Base sequence-3'</div>
+      <div style="position: absolute; margin-top: 40px; margin-left: 33%;">3'-Complementary sequence-5'</div>
+      <div style="overflow-x: scroll;">
+        <div class="sequence" id = "base_sequence">[BASE_SEQUENCE]</div>
+        <div class = "sequence" style = "margin-bottom: 22px;" id = "complementary_sequence">[COMPLEMENTARY_SEQUENCE]</div>
+      </div>
+    </div>
+
+
+    <p style="font-size: 22px;">Primers</p>
+
+    <div style="display: flex; overflow-x: scroll; justify-content: space-between; width: 95%; border-radius: 10px; border: 2px solid gray; padding: 5px; margin-top: 5px;">
+      
+      <div class="primer" id = "F3">
+        <p style="font-size: 20px;">F3</p>
+        <p>Sequence</p>
+        <p id = "F3_seq">[SEQUENCE]</p>
+        <div style="display: flex;">
+          <div><p>Start</p><p id = "F3_start">[START]</p></div>
+          <div><p>Length</p><p id = "F3_length">[LENGTH]</p></div>
+          <div><p>End</p><p id = "F3_end">[END]</p></div>
+        </div>
+        <div style="display: flex;">
+          <div><p>GC</p><p id = "F3_GC">[GC]</p></div>
+          <div><p>Tm</p><p id = "F3_Tm">[Tm]</p></div>
+        </div>
+      </div>
+
+      <div class="primer" id = "F2">
+        <p style="font-size: 20px;">F2</p>
+        <p>Sequence</p>
+        <p id = "F2_seq">[SEQUENCE]</p>
+        <div style="display: flex;">
+          <div><p>Start</p><p id = "F2_start">[START]</p></div>
+          <div><p>Length</p><p id = "F2_length">[LENGTH]</p></div>
+          <div><p>End</p><p id = "F2_end">[END]</p></div>
+        </div>
+        <div style="display: flex;">
+          <div><p>GC</p><p id = "F2_GC">[GC]</p></div>
+          <div><p>Tm</p><p id = "F2_Tm">[Tm]</p></div>
+        </div>
+      </div>
+
+      <div class="primer" style="display: none;" id="L1">
+        <p style="font-size: 20px;">L1</p>
+        <p>Sequence</p>
+        <p id = "L1_seq">[SEQUENCE]</p>
+        <div style="display: flex;">
+          <div><p>Start</p><p id = "L1_start">[START]</p></div>
+          <div><p>Length</p><p id = "L1_length">[LENGTH]</p></div>
+          <div><p>End</p><p id = "L1_end">[END]</p></div>
+        </div>
+        <div style="display: flex;">
+          <div><p>GC</p><p id = "L1_GC">[GC]</p></div>
+          <div><p>Tm</p><p id = "L1_Tm">[Tm]</p></div>
+        </div>
+      </div>
+
+      <div class="primer" id = "F1c">
+        <p style="font-size: 20px;">F1c</p>
+        <p>Sequence</p>
+        <p id = "F1c_seq">[SEQUENCE]</p>
+        <div style="display: flex;">
+          <div><p>Start</p><p id = "F1c_start">[START]</p></div>
+          <div><p>Length</p><p id = "F1c_length">[LENGTH]</p></div>
+          <div><p>End</p><p id = "F1c_end">[END]</p></div>
+        </div>
+        <div style="display: flex;">
+          <div><p>GC</p><p id = "F1c_GC">[GC]</p></div>
+          <div><p>Tm</p><p id = "F1c_Tm">[Tm]</p></div>
+        </div>
+      </div>
+
+      <div class="primer" id = "B1c">
+        <p style="font-size: 20px;">B1c</p>
+        <p>Sequence</p>
+        <p id = "B1c_seq">[SEQUENCE]</p>
+        <div style="display: flex;">
+          <div><p>Start</p><p id = "B1c_start">[START]</p></div>
+          <div><p>Length</p><p id = "B1c_length">[LENGTH]</p></div>
+          <div><p>End</p><p id = "B1c_end">[END]</p></div>
+        </div>
+        <div style="display: flex;">
+          <div><p>GC</p><p id = "B1c_GC">[GC]</p></div>
+          <div><p>Tm</p><p id = "B1c_Tm">[Tm]</p></div>
+        </div>
+      </div>
+
+      <div class="primer" style="display: none;" id = "L2">
+        <p style="font-size: 20px;">L2</p>
+        <p>Sequence</p>
+        <p id = "L2_seq">[SEQUENCE]</p>
+        <div style="display: flex;">
+          <div><p>Start</p><p id = "L2_start">[START]</p></div>
+          <div><p>Length</p><p id = "L2_length">[LENGTH]</p></div>
+          <div><p>End</p><p id = "L2_end">[END]</p></div>
+        </div>
+        <div style="display: flex;">
+          <div><p>GC</p><p id = "L2_GC">[GC]</p></div>
+          <div><p>Tm</p><p id = "L2_Tm">[Tm]</p></div>
+        </div>
+      </div>
+    
+
+      <div class="primer" id = "B2">
+        <p style="font-size: 20px;">B2</p>
+        <p>Sequence</p>
+        <p id = "B2_seq">[SEQUENCE]</p>
+        <div style="display: flex;">
+          <div><p>Start</p><p id = "B2_start">[START]</p></div>
+          <div><p>Length</p><p id = "B2_length">[LENGTH]</p></div>
+          <div><p>End</p><p id = "B2_end">[END]</p></div>
+        </div>
+        <div style="display: flex;">
+          <div><p>GC</p><p id = "B2_GC">[GC]</p></div>
+          <div><p>Tm</p><p id = "B2_Tm">[Tm]</p></div>
+        </div>
+      </div>
+
+      <div class="primer" id = "B3">
+        <p style="font-size: 20px;">B3</p>
+        <p>Sequence</p>
+        <p id = "B3_seq">[SEQUENCE]</p>
+        <div style="display: flex;">
+          <div><p>Start</p><p id = "B3_start">[START]</p></div>
+          <div><p>Length</p><p id = "B3_length">[LENGTH]</p></div>
+          <div><p>End</p><p id = "B3_end">[END]</p></div>
+        </div>
+        <div style="display: flex;">
+          <div><p>GC</p><p id = "B3_GC">[GC]</p></div>
+          <div><p>Tm</p><p id = "B3_Tm">[Tm]</p></div>
+        </div>
+      </div>
+
+    </div>
+
+    <button id="export_btn" class="button-26">Export to Excel</button>
+
+
+  </body>
+</html>

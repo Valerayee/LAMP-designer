@@ -1,0 +1,36 @@
+{
+  "name": "LAMP-designer",
+  "productName": "LAMP-designer",
+  "version": "1.0.0",
+  "description": "My Electron application description",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "build": "electron-packager .",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "echo \"No linting configured\""
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^7.4.0",
+    "@electron-forge/maker-deb": "^7.4.0",
+    "@electron-forge/maker-rpm": "^7.4.0",
+    "@electron-forge/maker-squirrel": "^7.4.0",
+    "@electron-forge/maker-zip": "^7.4.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.4.0",
+    "@electron-forge/plugin-fuses": "^7.4.0",
+    "@electron/fuses": "^1.8.0",
+    "electron": "^20.0.0"
+  },
+  "keywords": [],
+  "author": "Valera",
+  "license": "MIT",
+  "dependencies": {
+    "electron-packager": "^17.1.2",
+    "electron-squirrel-startup": "^1.0.0",
+    "ffi-napi": "^4.0.3",
+    "node-gyp": "^10.1.0",
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.2/xlsx-0.20.2.tgz"
+  }
+}
